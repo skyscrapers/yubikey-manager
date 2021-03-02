@@ -30,9 +30,11 @@ from __future__ import absolute_import
 import functools
 import click
 import sys
+import os
 from ..util import parse_b32_key
 from collections import OrderedDict, MutableMapping
 from cryptography.hazmat.primitives import serialization
+from notifypy import Notify
 
 
 class UpperCaseChoice(click.Choice):
@@ -161,5 +163,11 @@ def click_parse_b32_key(ctx, param, val):
 def prompt_for_touch():
     try:
         click.echo('Touch your YubiKey...', err=True)
+        notification = Notify()
+        notification.title = "Touch your yubikey"
+        notification.message = "Touch your yubikey"
+        notification.audio = os.path.join(os.path.dirname(__file__), "notification_sound.wav")
+        notification.icon = os.path.join(os.path.dirname(__file__), "yubikey.png")
+        notification.send()
     except Exception:
         sys.stderr.write('Touch your YubiKey...\n')

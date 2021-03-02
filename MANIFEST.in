@@ -9,3 +9,5 @@ include man/*
 include ykman/VERSION
 recursive-exclude *.pyc
 recursive-exclude test *.pyc
+include ykman/cli/yubikey.png
+include ykman/cli/notification_sound.wav
